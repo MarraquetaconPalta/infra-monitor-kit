@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Valida nombres de host (por ejemplo "web-01" o "db.internal.local").
  * Reglas esperadas (RFC 1123):
  *  - Solo letras minúsculas, números y guiones.
@@ -6,6 +6,7 @@
  *  - Una etiqueta NO puede comenzar ni terminar con guion.
  */
 export function isValidHostname(hostname: string): boolean {
-  const regex = /^[a-z0-9-]{1,63}(\.[a-z0-9-]{1,63})*$/;
+  const labelRegex = '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?';
+  const regex = new RegExp(`^${labelRegex}(?:\\.${labelRegex})*$`);
   return regex.test(hostname);
 }
